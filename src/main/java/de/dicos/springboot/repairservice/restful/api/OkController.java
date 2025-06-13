@@ -49,6 +49,7 @@ public class OkController
 	{
 		return new ResponseEntity<String>("OK", HttpStatus.OK);
 	}
+	
 
 	// /////////////////////////////////////////////////////////
 	// Inner Classes

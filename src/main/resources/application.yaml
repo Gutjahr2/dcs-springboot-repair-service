@@ -33,3 +33,8 @@ spring:
 
 server:
   port: 1234
+  
+---
+administration:
+  api:
+    url: https://123.123.123.123:1234  
