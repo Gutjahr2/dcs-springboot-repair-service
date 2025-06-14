@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
 import de.dicos.springboot.repairservice.gen.api.DefaultApi;
+import de.dicos.springboot.repairservice.restful.exception.AdministrationSystemResponseExceptionMapper;
 
 @Configuration
 public class AdministrationClientConfig {
@@ -21,7 +22,8 @@ public class AdministrationClientConfig {
         clientFactoryBean.setAddress(apiUrl);
         clientFactoryBean.setProviders(List.of(
             new BinaryDataProvider<>(),
-            new JacksonJsonProvider()
+            new JacksonJsonProvider(),
+            new AdministrationSystemResponseExceptionMapper()
         ));
         clientFactoryBean.setServiceClass(DefaultApi.class);
         return (DefaultApi) clientFactoryBean.create();

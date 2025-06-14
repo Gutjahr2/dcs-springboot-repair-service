@@ -1,31 +1,34 @@
 server:
   port: 8081
-  servlet.context-path: /repair-service
+  servlet:
+    context-path: /repair-service
 
 spring:
   security:
-    user: 
+    user:
       name: user1
       password: mypass
 
-springdoc.api-docs.enabled: false
+springdoc:
+  api-docs:
+    enabled: false
 
 ---
 spring:
   profiles: devel
-
-  security: 
-    user: 
+  security:
+    user:
       name: user2
       password: test
-  
+
 ---
 spring:
   profiles: e2e
 
 app:
-  dummy.login.active: true
-
+  dummy:
+    login:
+      active: true
 
 ---
 spring:
@@ -33,8 +36,11 @@ spring:
 
 server:
   port: 1234
-  
+
 ---
 administration:
   api:
-    url: https://123.123.123.123:1234  
+    url: https://123.123.123.123:1234
+  mock:
+    enabled: true
+    response-status: 201

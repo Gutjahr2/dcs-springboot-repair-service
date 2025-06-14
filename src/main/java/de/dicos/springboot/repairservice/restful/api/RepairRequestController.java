@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.dicos.springboot.repairservice.gen.model.RepairRequest;
-import de.dicos.springboot.repairservice.restful.dto.ErrorResponse;
-import de.dicos.springboot.repairservice.restful.dto.RepairAppointmentResponse;
+import de.dicos.springboot.repairservice.restful.dto.ErrorResponseDto;
+import de.dicos.springboot.repairservice.restful.dto.RepairAppointmentResponseDto;
+import de.dicos.springboot.repairservice.restful.dto.RepairRequestDto;
 import de.dicos.springboot.repairservice.restful.services.AdministrationService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -65,18 +65,16 @@ public class RepairRequestController
 	               description = "This endpoint receives a repair request with customer details and the necessary repair operations, and sends it to the administration system.")
 	    @ApiResponses(value = {
 	        @ApiResponse(responseCode = "201", description = "Car repair request created successfully", 
-	                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = RepairAppointmentResponse.class))),
+	                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = RepairAppointmentResponseDto.class))),
 	        @ApiResponse(responseCode = "400", description = "Bad request, invalid input data", 
-	                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorResponse.class))),
+	                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorResponseDto.class))),
 	        @ApiResponse(responseCode = "500", description = "Internal server error, failed to process the request", 
-	                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorResponse.class))),
+	                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorResponseDto.class))),
 	    })
 	@PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> sendRepairRequest(@Valid @RequestBody RepairRequest request)
+	public ResponseEntity<?> sendRepairRequest(@Valid @RequestBody RepairRequestDto request)
 		throws Exception
 	{
-		log.info("sending new repair request to administration");
-
 		return ResponseEntity.status(HttpStatus.CREATED).body(administrationService.postRepairRequest(request));
 	}
 

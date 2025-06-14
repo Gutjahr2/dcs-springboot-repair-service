@@ -47,7 +47,8 @@ public class WebSecurityConfig
 		throws Exception
 	{
 		// Requests ohne Authentisierung
-		httpSecurity.authorizeRequests()
+		httpSecurity.csrf().disable()
+			.authorizeRequests()
 			.antMatchers("/rest/ok").permitAll()
 			.antMatchers("/**").authenticated().and().httpBasic();
 	}

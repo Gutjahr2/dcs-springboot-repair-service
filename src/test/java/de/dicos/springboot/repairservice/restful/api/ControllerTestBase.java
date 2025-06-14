@@ -9,6 +9,7 @@ package de.dicos.springboot.repairservice.restful.api;
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +26,7 @@ import org.springframework.web.client.ResponseErrorHandler;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
+import de.dicos.springboot.repairservice.restful.exception.AdministrationSystemResponseExceptionMapper;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,6 +44,8 @@ public class ControllerTestBase
 	// Class Members
 	// /////////////////////////////////////////////////////////
 
+    	private static final Logger log = LoggerFactory.getLogger(ControllerTestBase.class);
+    
 	@Value("${server.port}")
 	protected int port;
 
