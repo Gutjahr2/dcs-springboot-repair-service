@@ -7,18 +7,25 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class RepairRequestDto {
 
+    @Schema(description = "Date for repair", example= "1234")
     @NotNull(message = "Customer number is required")
     private Integer customerNumber;
 
+    @Schema(description = "Customer car model", example= "Audi A3")
     private String carModel;
 
+    @Schema(description = "Customer number Plate", example= "RÜD-MG-6")
     @NotBlank(message = "Number plate is required")
     private String numberPlate;
 
+    @Schema(description = "Date for repair", example= "01.09.2026")
     private String preferredDate;
 
+    @Schema(description = "List of repair operations", example= "[{\"description\": \"Ölwechsel\", \"priceEstimation\": 405.84}]")
     @NotEmpty(message = "At least one repair operation is required")
     @Valid
     private List<RepairOperationDto> repairOperations;

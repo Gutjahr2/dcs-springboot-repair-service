@@ -33,14 +33,20 @@ app:
 ---
 spring:
   profiles: test
+  security:
+    user:
+      name: testuser
+      password: test
 
 server:
   port: 1234
+  servlet:
+    context-path: /repair-service
 
 ---
 administration:
   api:
     url: https://123.123.123.123:1234
   mock:
-    enabled: true
+    enabled: false
     response-status: 201

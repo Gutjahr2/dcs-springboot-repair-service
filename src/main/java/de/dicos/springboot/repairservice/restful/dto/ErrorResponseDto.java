@@ -7,29 +7,32 @@ public class ErrorResponseDto {
 
     @Schema(description = "Http Statuscode", example = "400")
     private int code;
-    
+
     @Schema(description = "Error message", example = "Invalid input data")
     private String message;
 
+    public ErrorResponseDto() {
+    }
+
     public ErrorResponseDto(int code, String message) {
-        this.code = code;
-        this.message = message;
+	this.code = code;
+	this.message = message;
     }
 
     public int getCode() {
-        return code;
+	return code;
     }
 
     public void setCode(int code) {
-        this.code = code;
+	this.code = code;
     }
 
     public String getMessage() {
-        return message;
+	return message;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+	this.message = message;
     }
-    
+
 }

@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.ProcessingException;
-import javax.ws.rs.WebApplicationException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +26,7 @@ import de.dicos.springboot.repairservice.restful.dto.ErrorResponseDto;
 import de.dicos.springboot.repairservice.restful.dto.RepairAppointmentResponseDto;
 import de.dicos.springboot.repairservice.restful.dto.RepairOperationDto;
 import de.dicos.springboot.repairservice.restful.dto.RepairRequestDto;
-import de.dicos.springboot.repairservice.restful.exception.ApiResponseException;
+import de.dicos.springboot.repairservice.restful.exception.RepairServiceException;
 
 /**
  *
@@ -75,26 +73,26 @@ public class AdministrationService
 	    	    return new RepairAppointmentResponseDto(repairRequest.getPreferredDate());
 	    	    
 	    	//Diese Exception wird vom AdministrationSystemExceptionMapper gelogged und geworfen  
-	    	} catch (ApiResponseException e) {
+	    	} catch (RepairServiceException e) {
 	    	    throw e;  
 	    	} catch (ProcessingException e) {
 	    	    Throwable cause = e.getCause();
 	    	    if (cause instanceof SocketTimeoutException) {
 	    		log.warn("Read timeout occurred", e);
-	    		throw new ApiResponseException(ResponseEntity
+	    		throw new RepairServiceException(ResponseEntity
 	    		   .status(HttpStatus.GATEWAY_TIMEOUT)
 	    		   .body(new ErrorResponseDto(504, "Timeout while reading response from administration system")));
 	    	    }
 
 	    	    if (cause instanceof ConnectException) {
 	    		log.warn("Connection timeout occurred", e);
-	    		throw new ApiResponseException(ResponseEntity
+	    		throw new RepairServiceException(ResponseEntity
 	    		   .status(HttpStatus.GATEWAY_TIMEOUT)
 	    		   .body(new ErrorResponseDto(504, "Could not connect to administration system")));
 	    	    }
 	    	    
 	            log.error("Unexpected processing exception", e);
-	            throw new ApiResponseException(ResponseEntity
+	            throw new RepairServiceException(ResponseEntity
 	               .status(HttpStatus.INTERNAL_SERVER_ERROR)
 	               .body(new ErrorResponseDto(500, "Unexpected communication error")));  
 	    	}    
@@ -102,11 +100,11 @@ public class AdministrationService
 	
 	private RepairAppointmentResponseDto postRepairRequestMock(RepairRequestDto repairRequest) {
 		if (mockResponseStatus == 201) {
-			log.info("Mock-Modus: Simulating successful response");
+			log.info("Mock mode: Simulating successful response");
 			return new RepairAppointmentResponseDto(repairRequest.getPreferredDate());
 		} else {
 			log.warn("Mock mode: Simulating error response with status {}", mockResponseStatus);
-			throw new ApiResponseException(ResponseEntity
+			throw new RepairServiceException(ResponseEntity
 					.status(mockResponseStatus)
 					.body(new ErrorResponseDto(mockResponseStatus, "Simulated error message in mock mode")));
 		}

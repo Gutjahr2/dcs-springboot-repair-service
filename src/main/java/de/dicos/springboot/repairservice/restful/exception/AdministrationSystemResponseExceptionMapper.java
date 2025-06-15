@@ -43,7 +43,7 @@ public class AdministrationSystemResponseExceptionMapper implements ResponseExce
 
         log.error("Administration system responded with HTTP {} - {}", status, message);
 
-        return new ApiResponseException(
+        return new RepairServiceException(
             ResponseEntity.status(status).body(new ErrorResponseDto(status, message))
         );
     }

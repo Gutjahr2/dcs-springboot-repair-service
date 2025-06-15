@@ -2,18 +2,18 @@ package de.dicos.springboot.repairservice.restful.exception;
 
 import org.springframework.http.ResponseEntity;
 
-public class ApiResponseException extends RuntimeException {
+public class RepairServiceException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
     
     private final ResponseEntity<?> response;
 
-    public ApiResponseException(ResponseEntity<?> response) {
+    public RepairServiceException(ResponseEntity<?> response) {
         super();
         this.response = response;
     }
 
-    public ApiResponseException(String message, ResponseEntity<?> response) {
+    public RepairServiceException(String message, ResponseEntity<?> response) {
         super(message);
         this.response = response;
     }
