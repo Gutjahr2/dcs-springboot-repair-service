@@ -67,7 +67,7 @@ public class RepairEstimationServiceTest {
     }
 
     @Test
-    void testEmptyRepairActionsList_ThrowsRepairServiceException() {
+    void testEmptyRepairActions_ThrowsRepairServiceException() {
 	RepairEstimationRequestDto request = new RepairEstimationRequestDto();
 	request.setCarModel(CarModel.AUDI_A3);
 	request.setRepairActions(Arrays.asList());

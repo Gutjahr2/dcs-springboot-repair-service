@@ -9,6 +9,7 @@ import de.dicos.springboot.repairservice.restful.model.CarModel;
 import de.dicos.springboot.repairservice.restful.model.RepairAction;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(description = "RequestDto for the repair-estimation")
 public class RepairEstimationRequestDto {
 
     @Schema(description = "Customerr car model", example = "AUDI_A3")

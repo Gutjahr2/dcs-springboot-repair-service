@@ -48,5 +48,5 @@ administration:
   api:
     url: https://123.123.123.123:1234
   mock:
-    enabled: false
+    enabled: true
     response-status: 201
